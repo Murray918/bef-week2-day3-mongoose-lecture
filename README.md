@@ -1,3 +1,3 @@
-U of CRUD.
+D of CRUD.
 
-Find, update one, update many.
+Delete one

@@ -4,20 +4,15 @@ const Recipe = require('./models/recipe')
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost:27017/test');
 
-Recipe.findOne({name: "Pancakes"})
+Recipe.find({name: /Pancakes.*/i}).select('name')
   .then(function (results) {
-    console.log('findOne returned ' + results);
-    return Recipe.updateOne({source: "Grandma"},
-    {$push: {steps: "Call Grandma and tell her how it was."}})
+    console.log('find returned ' + JSON.stringify(results, null, 2));
+    return Recipe.deleteOne({name: results[results.length - 1].name})
   }).then(function (results) {
-    console.log('updateOne returned ' + JSON.stringify(results));
-    return Recipe.updateMany({source: "Grandma"},
-    {$push: {steps: "Call Grandma and tell her how much the dog enjoyed it."}})
-  }).then(function (results) {
-    console.log('updateMany returned ' + JSON.stringify(results));
-    return Recipe.find({source: "Grandma"}).select("name");
-  }).then(function (results) {
-    console.log('find returned ' + JSON.stringify(results));
+    console.log('deleteOne results ' + JSON.stringify(results));
+    return Recipe.find({name: /Pancakes.*/i}).select('name')
+    .then(function (results) {
+      console.log('find returned ' + JSON.stringify(results, null, 2));
   }).catch(function (error) {
     console.log('error ' + JSON.stringify(error));
   })
