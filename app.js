@@ -7,6 +7,10 @@ mongoose.connect('mongodb://localhost:27017/test');
 Recipe.findOne({name: "Pancakes"})
   .then(function (results) {
     console.log('findOne returned ' + results);
+    return Recipe.updateOne({source: "Grandma"},
+    {$push: {steps: "Call Grandma and tell her how it was."}})
+  }).then(function (results) {
+    console.log('updateOne returned ' + JSON.stringify(results));
   }).catch(function (error) {
     console.log('error ' + JSON.stringify(error));
   })
