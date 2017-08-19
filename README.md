@@ -1,2 +1,2 @@
 
-The branches reflect the code from the lecutures.
+Mongoose schema and model.
