@@ -11,8 +11,8 @@ Recipe.find({name: /Pancakes.*/i}).select('name')
   }).then(function (results) {
     console.log('deleteOne results ' + JSON.stringify(results));
     return Recipe.find({name: /Pancakes.*/i}).select('name')
-    .then(function (results) {
-      console.log('find returned ' + JSON.stringify(results, null, 2));
+  }).then(function (results) {
+    console.log('find returned ' + JSON.stringify(results, null, 2));
   }).catch(function (error) {
     console.log('error ' + JSON.stringify(error));
   })
