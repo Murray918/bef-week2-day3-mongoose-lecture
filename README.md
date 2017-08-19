@@ -1,4 +1,7 @@
+CR of CRUD.
 
-The branches reflect the code from the lectures. See the README in each branch.
+Create, find one and find multiple.
 
-* 1-schemas-models
+Is coded to use promise chaining (i.e. then then then).
+
+If a Recipe is created with same name (not a unique name) will cause an error.
