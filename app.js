@@ -11,6 +11,13 @@ Recipe.findOne({name: "Pancakes"})
     {$push: {steps: "Call Grandma and tell her how it was."}})
   }).then(function (results) {
     console.log('updateOne returned ' + JSON.stringify(results));
+    return Recipe.updateMany({source: "Grandma"},
+    {$push: {steps: "Call Grandma and tell her how much the dog enjoyed it."}})
+  }).then(function (results) {
+    console.log('updateMany returned ' + JSON.stringify(results));
+    return Recipe.find({source: "Grandma"}).select("name");
+  }).then(function (results) {
+    console.log('find returned ' + JSON.stringify(results));
   }).catch(function (error) {
     console.log('error ' + JSON.stringify(error));
   })
