@@ -8,6 +8,9 @@ Recipe.findOne({name: 'Pancakes'})
   .then(function (pancakes) {
     console.log('find returned ' + JSON.stringify(pancakes, null, 2));
     console.log('pancakes total time ' + pancakes.totalTime)
+    return pancakes.hi()
+  }).then(function(result) {
+      console.log(result);
   })
 
 process.on('SIGINT', function() {

@@ -1,5 +1,7 @@
 // models/recipe.js
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+const Promise = require('bluebird');
 
 const recipeSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
@@ -21,6 +23,19 @@ const recipeSchema = new mongoose.Schema({
 recipeSchema.virtual('totalTime').get(function () {
   return (this.prepTime || 0) + (this.cookTime || 0);
 });
+
+recipeSchema.methods.hi = function (callback) {
+  return new Promise(function(resolve, reject) {
+      resolve("hi")
+  })
+}
+
+recipeSchema.methods.findRecipesFromSameSource = function (callback) {
+  return this.model('Recipe').find({
+    source: this.source,
+    _id: {$ne: this._id}
+  }, callback);
+}
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
