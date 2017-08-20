@@ -1,3 +1,2 @@
-D of CRUD.
 
-Delete one
+Virtual totalTime field.
