@@ -1,2 +1,2 @@
 
-Virtual totalTime field.
+findByNumberIngredients static method
