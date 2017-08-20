@@ -4,18 +4,12 @@ const Recipe = require('./models/recipe')
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost:27017/test');
 
-Recipe.findOne({name: 'Pancakes'})
-  .then(function (pancakes) {
-    console.log('find returned ' + JSON.stringify(pancakes, null, 2));
-    console.log('pancakes total time ' + pancakes.totalTime)
-    return pancakes.hi()
-  }).then(function(result) {
-    console.log('hi returned ' + result);
-    return Recipe.findOne({name: 'Pancakes'})
-  }).then(function(pancakes) {
-    return pancakes.findRecipesFromSameSource()
-  }).then(function(result) {
-    console.log('from same source ' + result);
+Recipe.find()
+  .then(function(results) {
+    console.log('find all ' + JSON.stringify(results, null, 2));
+    return Recipe.findByNumberIngredients(0)
+  }).then(function(results) {
+    console.log('find with no ingredients ' + JSON.stringify(results, null, 2));
   })
 
 process.on('SIGINT', function() {
