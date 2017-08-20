@@ -7,9 +7,11 @@ mongoose.connect('mongodb://localhost:27017/test');
 Recipe.find()
   .then(function(results) {
     console.log('find all ' + JSON.stringify(results, null, 2));
-    return Recipe.findByNumberIngredients(0)
+    return Recipe.find(
+      {source: 'Grandma'})
+      .numberIngredients(0)
   }).then(function(results) {
-    console.log('find with no ingredients ' + JSON.stringify(results, null, 2));
+    console.log('find with query chaining ingredients ' + JSON.stringify(results, null, 2));
   })
 
 process.on('SIGINT', function() {

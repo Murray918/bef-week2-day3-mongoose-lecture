@@ -41,6 +41,11 @@ recipeSchema.statics.findByNumberIngredients = function (num) {
     return this.find({ingredients: {$size: num}});
 };
 
+recipeSchema.query.numberIngredients = function (num) {
+  return this.find({ingredients: {$size: num}});
+};
+
+
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 module.exports = Recipe
