@@ -12,7 +12,15 @@ const recipeSchema = new mongoose.Schema({
     }],
     steps: [String],
     source: {type: String}
+// }
+// {
+//   // show virtuals when the toJSON is called
+//     toJSON: { virtuals: true }
 })
+
+recipeSchema.virtual('totalTime').get(function () {
+  return (this.prepTime || 0) + (this.cookTime || 0);
+});
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
 

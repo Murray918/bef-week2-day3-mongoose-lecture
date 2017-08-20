@@ -4,17 +4,10 @@ const Recipe = require('./models/recipe')
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost:27017/test');
 
-Recipe.find({name: /Pancakes.*/i}).select('name')
-  .then(function (results) {
-    console.log('find returned ' + JSON.stringify(results, null, 2));
-    return Recipe.deleteOne({name: results[results.length - 1].name})
-  }).then(function (results) {
-    console.log('deleteOne results ' + JSON.stringify(results));
-    return Recipe.find({name: /Pancakes.*/i}).select('name')
-  }).then(function (results) {
-    console.log('find returned ' + JSON.stringify(results, null, 2));
-  }).catch(function (error) {
-    console.log('error ' + JSON.stringify(error));
+Recipe.findOne({name: 'Pancakes'})
+  .then(function (pancakes) {
+    console.log('find returned ' + JSON.stringify(pancakes, null, 2));
+    console.log('pancakes total time ' + pancakes.totalTime)
   })
 
 process.on('SIGINT', function() {
