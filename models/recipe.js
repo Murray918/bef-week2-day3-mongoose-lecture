@@ -24,17 +24,17 @@ recipeSchema.virtual('totalTime').get(function () {
   return (this.prepTime || 0) + (this.cookTime || 0);
 });
 
-recipeSchema.methods.hi = function (callback) {
+recipeSchema.methods.hi = function () {
   return new Promise(function(resolve, reject) {
       resolve("hi")
   })
 }
 
-recipeSchema.methods.findRecipesFromSameSource = function (callback) {
+recipeSchema.methods.findRecipesFromSameSource = function () {
   return this.model('Recipe').find({
     source: this.source,
     _id: {$ne: this._id}
-  }, callback);
+  });
 }
 
 const Recipe = mongoose.model('Recipe', recipeSchema);

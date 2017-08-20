@@ -10,7 +10,12 @@ Recipe.findOne({name: 'Pancakes'})
     console.log('pancakes total time ' + pancakes.totalTime)
     return pancakes.hi()
   }).then(function(result) {
-      console.log(result);
+    console.log('hi returned ' + result);
+    return Recipe.findOne({name: 'Pancakes'})
+  }).then(function(pancakes) {
+    return pancakes.findRecipesFromSameSource()
+  }).then(function(result) {
+    console.log('from same source ' + result);
   })
 
 process.on('SIGINT', function() {
