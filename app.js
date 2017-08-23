@@ -4,7 +4,7 @@ const Recipe = require('./models/recipe')
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost:27017/test');
 
-let suffix = 5;
+let suffix = '';
 let name = 'Pancakes' + suffix
 const recipe = new Recipe({name: name, source: "Grandma"});
 recipe.save()
@@ -12,10 +12,10 @@ recipe.save()
     console.log('saved ' + name);
     return Recipe.findOne({name: "Pancakes" + suffix})
   }).then(function(results) {
-    console.log('findOne returned ' + results);
+    console.log('\nfindOne returned\n' + results);
     return Recipe.find({cookTime: {$gt: 15, $lt: 60}})
   }).then(function (results) {
-    console.log('find returned ' + results.length + ' results');
+    console.log('\n\nfind returned ' + results.length + ' results');
   }).catch(function (error) {
     console.log('error ' + JSON.stringify(error));
   })
