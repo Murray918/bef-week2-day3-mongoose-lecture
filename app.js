@@ -4,7 +4,7 @@ const Recipe = require('./models/recipe')
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost:27017/test');
 
-console.log(new Recipe({name: "Pancakes5"}));
+console.log(new Recipe({name: "Pancakes"}));
 
 process.on('SIGINT', function() {
   console.log("\nshutting down");
